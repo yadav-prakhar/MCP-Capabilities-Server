@@ -1,6 +1,6 @@
-# MCP Version Server
+# Capabilities Server
 
-An MCP (Model Context Protocol) server that outputs the protocol version being used.
+An MCP (Model Context Protocol) server that checks client capabilities.
 
 ## Installation
 
@@ -21,9 +21,9 @@ This server communicates over stdio. To use it with an MCP client, add it to you
 ```json
 {
   "mcpServers": {
-    "version-server": {
+    "capabilities-server": {
       "command": "node",
-      "args": ["/path/to/mcp-version-server/dist/index.js"]
+      "args": ["/path/to/capabilities-server/dist/index.js"]
     }
   }
 }
