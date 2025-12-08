@@ -17,7 +17,14 @@ async function main() {
     {
       capabilities: {
         sampling: {
+          context: {},
           tools: {},
+        },
+        roots: {
+          listChanged: true,
+        },
+        elicitation: {
+          form: {},
         },
       },
     }
@@ -25,7 +32,7 @@ async function main() {
 
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
-  const serverEntry = path.resolve(__dirname, "./index.js");
+  const serverEntry = path.resolve(__dirname, "../../dist/index.js");
 
   const sanitizedEnv: Record<string, string> = Object.fromEntries(
     Object.entries(process.env).filter(
@@ -42,6 +49,25 @@ async function main() {
 
   await client.connect(transport);
 
+  // Call get_client_capabilities tool
+  console.log("=== Client Capabilities (Markdown) ===\n");
+  const capabilitiesResponse = await client.callTool({
+    name: "get_client_capabilities",
+    arguments: { format: "markdown" },
+  });
+
+  if ("content" in capabilitiesResponse) {
+    const toolResult = capabilitiesResponse as CallToolResult;
+    const textBlock = toolResult.content.find(
+      (block): block is TextContent => block.type === "text"
+    );
+
+    if (textBlock) {
+      console.log(textBlock.text);
+    }
+  }
+
+  console.log("\n=== Protocol Version ===\n");
   const toolResponse = await client.callTool({
     name: "get_protocol_version",
     arguments: {},

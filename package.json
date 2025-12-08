@@ -1,18 +1,22 @@
 {
-  "name": "mcp-version-server",
+  "name": "capabilities-server",
   "version": "1.0.0",
-  "description": "A sample MCP server that outputs the protocol version",
+  "description": "An MCP server that checks client capabilities",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "test": "vitest",
+    "test:client": "npm run build && tsx test/sampleClient/getVersion.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.23.0"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
-    "typescript": "^5.3.0"
+    "tsx": "^4.19.0",
+    "typescript": "^5.3.0",
+    "vitest": "^4.0.15"
   }
 }
