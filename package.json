@@ -1,8 +1,12 @@
 {
-  "name": "capabilities-server",
-  "version": "1.0.0",
+"name": "@yadav-prakhar/capabilities-server",
   "description": "An MCP server that checks client capabilities",
   "type": "module",
+    "repository": "https://github.com/yadav-prakhar/MCP-Capabilities-Server",
+    "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "@yadav-prakhar:registry": "https://npm.pkg.github.com"
+  },
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
